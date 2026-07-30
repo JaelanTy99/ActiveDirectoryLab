@@ -114,6 +114,8 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet 2" -ServerAddresses 127.0.0
 Get-NetRoute -DestinationPrefix "0.0.0.0/0"
 ```
 
+*Screenshots: [`01-network-baseline-before-static-ip.png`](../screenshots/01-vm-setup/01-network-baseline-before-static-ip.png), [`02-static-ip-confirmed-ethernet2.png`](../screenshots/01-vm-setup/02-static-ip-confirmed-ethernet2.png)*
+
 Snapshot taken at this point as a clean rollback point before touching AD DS:
 
 ```bash

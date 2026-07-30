@@ -24,6 +24,8 @@ Install-ADDSForest `
 
 Promotion succeeded on retry with a compliant DSRM password; the server rebooted automatically at the end, confirming success.
 
+*Screenshot: [`01-dsrm-password-complexity-failure.png`](../screenshots/02-ad-setup/01-dsrm-password-complexity-failure.png)*
+
 ## 2. Post-Promotion Verification
 
 ```powershell
@@ -61,6 +63,8 @@ Remove-DnsServerResourceRecord -ZoneName "lab.jaebeasty.local" -RRType A -Name "
 
 Confirmed clean afterward via `nslookup lab.jaebeasty.local 192.168.56.10` querying the DC directly (bypassing any client-side resolver cache).
 
+*Screenshots: [`02-dns-duplicate-address-issue.png`](../screenshots/02-ad-setup/02-dns-duplicate-address-issue.png), [`03-dns-duplicate-resolved.png`](../screenshots/02-ad-setup/03-dns-duplicate-resolved.png)*
+
 ## 3. OU Structure
 
 Design combines Microsoft's administrative tier model (privilege isolation) with a location layer (GPO scoping):
@@ -86,6 +90,8 @@ lab.jaebeasty.local
 
 Built via `scripts/New-OUStructure.ps1` — idempotent, `-ProtectedFromAccidentalDeletion` set on every OU.
 
+*Screenshots: [`04-ou-structure-build-complete.png`](../screenshots/02-ad-setup/04-ou-structure-build-complete.png), [`07-aduc-final-ou-tree.png`](../screenshots/02-ad-setup/07-aduc-final-ou-tree.png)*
+
 ## 4. Naming Convention
 
 Full convention documented separately in `docs/naming-convention.md`. Summary:
@@ -101,6 +107,8 @@ Full convention documented separately in `docs/naming-convention.md`. Summary:
 ## 5. Security Groups
 
 10 groups built via `scripts/New-SecurityGroups.ps1`, all landing in a single flat `Security Groups` OU — organization comes from the naming convention itself, not OU nesting.
+
+*Screenshot: [`05-security-groups-created.png`](../screenshots/02-ad-setup/05-security-groups-created.png)*
 
 ## 6. Bulk User Creation (50 users)
 
@@ -126,6 +134,8 @@ Fixed by manually creating the second account with a distinguishing CN (`"Joseph
 # 50
 ```
 
+*Screenshot: [`06-bulk-users-49-of-50-created.png`](../screenshots/02-ad-setup/06-bulk-users-49-of-50-created.png) — shows the original 49/50 run before the manual fix above*
+
 ## 7. Offboarding Script
 
 `scripts/Invoke-UserOffboarding.ps1` — takes a single `-SamAccountName` parameter and performs, **in strict order**:
@@ -147,3 +157,5 @@ STEP 3/5 [OK] Removed from group: SG-Sales-CRM-Access
 STEP 4/5 [OK] Moved to OU=Disabled Users,OU=JAEBEASTY,...
 STEP 5/5 [OK] Final state - Enabled: False | Groups remaining: 0
 ```
+
+*Screenshot: [`08-offboarding-script-successful-run.png`](../screenshots/02-ad-setup/08-offboarding-script-successful-run.png)*

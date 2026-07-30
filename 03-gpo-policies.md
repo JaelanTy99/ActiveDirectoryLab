@@ -41,6 +41,8 @@ Maximum password age (days):    90
 Length of password history:     24
 ```
 
+*Screenshots: [`01-gpo-password-policy-editor.png`](../screenshots/03-gpo/01-gpo-password-policy-editor.png), [`02-gpo-precedence-bug-net-accounts-wrong.png`](../screenshots/03-gpo/02-gpo-precedence-bug-net-accounts-wrong.png) (the bug — still showing defaults), [`05-gpo-precedence-fixed-net-accounts-correct.png`](../screenshots/03-gpo/05-gpo-precedence-fixed-net-accounts-correct.png) (fixed)*
+
 ## GPO 2 — Screen Lock Timeout
 
 **Linked at `OU=JAEBEASTY`** (corrected after an initial mistake — see below).
@@ -72,6 +74,8 @@ New-GPLink -Name "GPO-ScreenLockTimeout" -Target "OU=JAEBEASTY,DC=lab,DC=jaebeas
 Remove-GPLink -Name "GPO-DisableRemovableMedia" -Target "DC=lab,DC=jaebeasty,DC=local"
 New-GPLink -Name "GPO-DisableRemovableMedia" -Target "OU=JAEBEASTY,DC=lab,DC=jaebeasty,DC=local"
 ```
+
+*Screenshots: [`03-gpo-links-at-domain-root-before-fix.png`](../screenshots/03-gpo/03-gpo-links-at-domain-root-before-fix.png), [`04-gpo-links-corrected-to-jaebeasty-ou.png`](../screenshots/03-gpo/04-gpo-links-corrected-to-jaebeasty-ou.png)*
 
 ## Final Verification
 
